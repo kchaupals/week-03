@@ -29,6 +29,7 @@ print(f'*** Pirmie 3: {numberList[slice(0,3)]}, Pēdējie 2: {numberList[slice(-
 print(f'*** Katrs 2: {numberList[slice(None, None, 2)]}') # Outputs elements gap by two from list
 
 # B part of the task
+print('*** --- Vārdnīcas ---  ***')
 
 gradeList = {"Anna":85,"Jānis":72,"Līga":95}
 gradeList["Valters"] = 92 # Adds new student to dictionary
@@ -37,8 +38,19 @@ gradeList["Līga"] = 95 # Adds "Līga" back to dictionary
 gradeList["Jānis"] = 75 # Changes value of "Jānis" in dictionary
 
 for name, grade in gradeList.items():
-    print(f'{name} : {grade}')
+    print(f'*** {name} : {grade}')
 
 topStud = max(gradeList, key=gradeList.get) # Finds the highest value grade in dictionary returns entry name
 topGrade = gradeList[topStud] # Returns grade value for topStud
-print(f'Labākais students: {topStud} ({topGrade})')
+print(f'*** Labākais students: {topStud} ({topGrade})')
+
+# C part of the task
+print('*** --- Kombinācijas ---  ***')
+studentList = [{"name": "Anna", "grade": 85},{"name": "Jānis", "grade": 72}, {"name": "Līga", "grade": 95}, {"name": "Valters", "grade": 92}]
+topStudents = []
+for student in studentList:
+    if student["grade"] >= 80: # Collects all the passed data and stores matching one in dictionary topStudents
+        topStudents.append({"name": student["name"], "grade": student["grade"]})
+print('***--- Studenti ar atzīmi >= 80 ---')
+for index, student in enumerate(topStudents, start= 1): # Sets enumerate to start with 1, if not passed index value will be starting as 0
+    print(f'*** {index}. {student["name"]} - {student["grade"]}')
