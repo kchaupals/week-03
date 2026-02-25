@@ -7,23 +7,21 @@ Task 2 for 03 Week of Learning Python
 The utils were looked up in task description and on website w3schools -> Python 
 '''
 
-def string_lower():
+def str_lower(text):
     '''
-    Method that converts a tring to lowercase
+    Method that converts a string to lowercase
 
     Returns:
         str: The modified string with all letters lowercased
 
     Example: 
         >>> text = "Python"
-        >>> result = text.lower()
-        >>> print(result)
+        >>> result = str_lower(text)
         python
     '''
-    text = "Python"
     return text.lower()
 
-def string_isspace():
+def str_isspace(text):
     '''
     Method that checks if the string consists only of whitespace
 
@@ -32,14 +30,12 @@ def string_isspace():
     
     Example: 
         >>> text = " "
-        >>> result = text.isspace()
-        >>> print(result)
+        >>> result = str_isspace(text)
         True
     '''
-    text = " "
     return text.isspace()
 
-def string_capitalize():
+def str_capitalize(text):
     '''
     Method that capitalizes the first letter of a predefined string
 
@@ -48,25 +44,18 @@ def string_capitalize():
 
     Example: 
         >>> text = "python"
-        >>> result = text.capitalize()
-        >>> print(result)
+        >>> result = str_capitalize(text)
         Python
     '''
-    text = "python"
     return text.capitalize()
 
-def string_textwrap():
+def truncate(text, max_len = 30, placeholder = '[...]'):
     '''
     Method that shortens a predefined string to fit a specified with.
 
     Required Parameters:
         text (str): The input string that needs to be shortened
         width (int): The maximum width for the shorteneed string (default is 30)
-
-    Optional parameters:
-        fix_sentence_endings (bool): When True, it ensures that the text ends with proper sentence ending. (default is False)
-        break_long_words (bool): When True, long words will be broken to fit within the width. (default is True)
-        break_on_hyphens (bool): When True, hyphenated words will be broken at the hyphen. (default is True)
         placeholder (str): A string to append at the end of truncated text. (default is "[...]")
 
     Returns:
@@ -74,64 +63,70 @@ def string_textwrap():
 
     Example:
         >>> text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id faucibus eros."
-        >>> result = textwrap.shorten(text, width = 30, placeholder = "...")
-        >>> print(result)
+        >>> result = str_textwrap(text, width = 30, placeholder = "...")
         Lorem ipsum dolor sit amet,...
     '''
-    text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id faucibus eros." 
-    return textwrap.shorten(text, width = 30, placeholder = "...")
+    return textwrap.shorten(text, max_len, placeholder)
 
-def string_count():
+def str_count(text, value):
     '''
     Method that counts occurrences of a substring in a string
 
     Required parameters:
-        value (str): The string to value to search for
-
-    Optional parameters:
-        start (int): The position to start the search. (Default is 0)
-        end (int): The position to end the search. (Default is the end of the string)
+        text (str): The string to value to search for
+        value (str): The substring which occurrences method counts
 
     Returns:
-        int: The number of non-overlapping occurrences of the specified substring in the string
+        int: The number of  occurrences of the specified substring in the string
 
     Example:
         >>> text = "ababab"
-        >>> result = text.count("ab")
-        >>> print(result)
-        2
+        >>> result = str_count(text,"ab")
+        3
     '''
-    text = "Mia embarked on a journey of learning Python. With every lesson, her love for Python grew deeper. She solved puzzles and built projects, each one reinforcing her belief that Python held endless potential. Soon, Python became her favorite tool for creativity."
-    return text.count("Python")
+    count = 0
+    start = 0
 
-def string_ljust():
+    while True:
+        start = text.find(value, start)
+
+        if start == -1:
+            break
+
+        count += 1
+        start += len(value)
+    
+    return count
+
+def str_ljust(text, width, char = '-'):
     '''
     Method that is used to left-align a string by padding it with spaces (or a specified character) to a certain width. This can be useful for formatting text output.
 
     Required parameters:
+        text (str): The string from which padding will be set
         width (int): The total width of the resulting string after padding. If the original string is longer than this width, it will return the string as it is.
     
     Optional parameters:
-        character (str): The character to use for padding. (Default is a space (' '))
+        char (str): The character to use for padding. (Default is a space (' '))
 
     Returns:
         str: A left-aligned string with the specified width
     
     Example: 
         >>> text = "Hello"
-        >>> result = text.ljust(10, '-')
-        >>> print(result)
+        >>> result = str_ljust(text, 30, '-')
         Hello-----
-    '''
-    text = "FITA"
-    return text.ljust(10, '*')
 
-def string_formatMap():
+    '''
+    return text.ljust(width, char)
+
+def str_formatMap(text, map):
     '''
     Method to format strings using a mapping (like a dictionary)
 
     Required parameters:
-        dictionary (dict): A mapping object containing the keys and values for the placeholders in the string
+        text (str): String with placeholders where dictionary values will be placed
+        map (dict): A mapping object containing the keys and values for the placeholders in the string
 
     Returns:
         str: A new string with the placeholders replaced by the corresponding values from the mapping.
@@ -139,15 +134,12 @@ def string_formatMap():
     Example: 
         >>> text = "Hello, {name}! Your age is {age} years."
         >>> map = {'name': 'Bob', 'age': 18}
-        >>> result = text.format_map(map)
-        >>> print(result)
+        >>> result = str_formatMap(text, map)
         Hello, Bob! Your age is 18 years.
     '''
-    text = "We are working with {name} for past {age} years!"
-    map = {"name" : "Python", "age" : 26}
     return text.format_map(map)
 
-def string_replace():
+def str_replace(text, old, new, count = -1):
     '''
     Method to replace occurrences of a specified substring within a string with another substring.
 
@@ -164,36 +156,96 @@ def string_replace():
     Example: 
         >>> text = "Hello, world! This is world of Python."
         >>> result = text.replace("world", "universe")
-        >>> print(result)
         Hello, universe! This is universe of Python.
     '''
-    text = "We really enjoy learning Python"
-    return text.replace("Python", "programming")
+    return text.replace(old, new, count)
 
+
+def count_words(text = None):
+    '''
+    Method to count only letters in passed string
+
+    Required parameters:
+        text (str): The string in which you desire to count how many letters are
+    
+    Returns:
+        int: Returns integer of how many letters were counted in passed string
+    
+    Example:
+        >>> text = "Hello world!"
+        >>> result = count_words(text)
+        10
+    '''
+    if text is None:
+        raise ValueError("You need to pass a parameter - string to execute this command.")
+
+    if not isinstance(text, str):
+        raise ValueError("Input must be a string.")
+    
+    return len(list(filter(str.isalpha, text)))
+
+def is_prime(num):
+    '''
+    Method checks if passed int number is prime or not
+
+    Required parameters:
+        num (int): Integer number that will be check if it passes as prime number
+    
+    Returns:
+        bool: Returns either True or False regarding int being prime number
+    
+    Example:
+        >>> num = 2
+        >>> result = is_prime(num)
+        True
+    '''
+    if num < 0:
+        raise ValueError("Prime number can't be passed as negative integer")
+    if num <= 1:
+        return False
+    for i in range(2, int(num**0.5) +1):
+        if num % i == 0:
+            return False
+    return True
+
+def factorial(n):
+    if n < 0:
+        raise ValueError("n must be a non-negative integer")
+    if n == 0 or n == 1:
+        return 1
+    result = 1
+    for i in range (2, n + 1):
+        result *= i
+    return result
+
+def total(n):
+    if not isinstance(n, list):
+        raise ValueError("Input must be a list of numbers")
+    total = 0
+    for num in n:
+        if not isinstance(num, (int, float)):
+            raise ValueError("All elements in the passed list must be numbers")
+        total += num
+    return total 
+
+def average(n):
+    if not isinstance(n, list):
+        raise ValueError("Input must be a list of numbers")
+    if len(n) == 0:
+        raise ValueError("The list cannot be empty")
+    
+    total = 0
+    for num in n:
+        if not isinstance(num, (int,float)):
+            raise ValueError("All elements in the passed list must be numbers")
+        total += num
+
+    return total / len(n)
+
+def clamp(num, low, high):
+
+    return max(low, min(num, high))
+    
 
 if __name__ == "__main__":
-    print('** .lower() method')
-    print(string_lower())
-    print("\n")
-    print('** .isspace() method')
-    print(string_isspace())
-    print("\n")
-    print('** capitalize() method')
-    print(string_capitalize())
-    print("\n")
-    print('** textwrap.shorten(args) method')
-    print(string_textwrap())
-    print("\n")
-    print('** .count(args) method')
-    print(string_count())
-    print("\n")
-    print('** .ljust(args) method')
-    print(string_ljust())
-    print("\n")
-    print('** .format_map(dict) method')
-    print(string_formatMap())
-    print("\n")
-    print('** .replace(args) method')
-    print(string_replace())
-    print("\n")
-    
+   print("Hello")
