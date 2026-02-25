@@ -35,7 +35,7 @@ def str_isspace(text):
     '''
     return text.isspace()
 
-def str_capitalize(text):
+def capitalize(text):
     '''
     Method that capitalizes the first letter of a predefined string
 
@@ -49,7 +49,7 @@ def str_capitalize(text):
     '''
     return text.capitalize()
 
-def truncate(text, max_len = 30, placeholder = '[...]'):
+def truncate(text, width = 30, placeholder = '[...]'):
     '''
     Method that shortens a predefined string to fit a specified with.
 
@@ -66,7 +66,7 @@ def truncate(text, max_len = 30, placeholder = '[...]'):
         >>> result = str_textwrap(text, width = 30, placeholder = "...")
         Lorem ipsum dolor sit amet,...
     '''
-    return textwrap.shorten(text, max_len, placeholder)
+    return textwrap.shorten(text, width = width, placeholder = placeholder)
 
 def str_count(text, value):
     '''
@@ -209,6 +209,22 @@ def is_prime(num):
     return True
 
 def factorial(n):
+    '''
+    Method that denotes factorial passed as integer
+
+    Required parameters: 
+        n (int): Integer number that is non-negative
+    
+    Returns:
+        int: Returns factorial of input number 
+
+    Example:
+        >>> num = 5
+        >>> factorial(5)
+        120
+    '''
+    if not isinstance(n, int):
+        raise ValueError("Input must be an integer")
     if n < 0:
         raise ValueError("n must be a non-negative integer")
     if n == 0 or n == 1:
@@ -218,34 +234,93 @@ def factorial(n):
         result *= i
     return result
 
-def total(n):
-    if not isinstance(n, list):
+def total(nlist):
+    '''
+    Method that returns sum of the all items passed in list
+
+    Required parameters:
+        nlist (list): List of numbers integers
+
+    Returns:
+        int: Total sum of list items
+
+    Example:
+        >>> nlist = [1, 2, 3]
+        >>> total(nlist)
+        6
+    '''
+    if not isinstance(nlist, list):
         raise ValueError("Input must be a list of numbers")
     total = 0
-    for num in n:
+    for num in nlist:
         if not isinstance(num, (int, float)):
             raise ValueError("All elements in the passed list must be numbers")
         total += num
     return total 
 
-def average(n):
-    if not isinstance(n, list):
+def average(nlist):
+    '''
+    Method that returns average of the passed list
+
+    Required parameters:
+        nlist (list): List of number integers
+
+    Returns:
+        int: Average of list
+
+    Example: 
+        >>> nlist = [1, 2, 3]
+        >>> average(nlist)
+        2
+    '''
+    if not isinstance(nlist, list):
         raise ValueError("Input must be a list of numbers")
-    if len(n) == 0:
+    if len(nlist) == 0:
         raise ValueError("The list cannot be empty")
     
     total = 0
-    for num in n:
+    for num in nlist:
         if not isinstance(num, (int,float)):
             raise ValueError("All elements in the passed list must be numbers")
         total += num
 
-    return total / len(n)
+    return total / len(nlist)
 
 def clamp(num, low, high):
+    '''
+    Method that limits number in specific range
+
+    Required parameters:
+        num (int/float): Integer which will be limited
+        low (int/float): Integer of min range
+        high (int/float): Integer of max range
+
+    Returns:
+        int or float: limited value
+
+    Example:
+        >>> clamp(15, 0, 10)
+        10
+        >>> clamp(-5, 0, 10)
+        0
+    '''
 
     return max(low, min(num, high))
     
 
 if __name__ == "__main__":
-   print("Hello")
+   print("*** Utils demo ***")
+   print(f'PYTHON -> str_lower("PYTHON") => {str_lower("PYTHON")}')
+   print(f'" " passed to str_isspace(" ") => {str_isspace(" ")}')
+   print(f'"name" passed to str_capitalize("name") => {capitalize("name")}')
+   print(f'text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id faucibus eros." passed to truncate(text) => {truncate("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id faucibus eros.")}')
+   print(f'If we count pairs of "ab" in "ababab" with str_count("ababab", "ab") => {str_count("ababab", "ab")}')
+   print(f'If we want to set padding left with symbols, like Hello+++ -> str_ljust("hello", 15, "+") => {str_ljust("hello", 8, "+")} ')
+   print(f'Having placeholder filled from dict -> str_formatMap(text, map) => {str_formatMap("Hello, {name}! Your age is {age} years.", {'name': 'Bob', 'age': 18})}')
+   print(f'Replacing substring in string with str_replace(text, old, new) => {str_replace("Hello world! This is wonderful world!", "world", "universe")}')
+   print(f'Counting letters in passed string like - "Hello world!" -> count_words("Hello world!") => {count_words("Hello world!")}')
+   print(f'Validating if passed number is prime - as example 15 -> is_prime(15) => {is_prime(15)}')
+   print(f'Providing number and getting factorial result - for example 5! -> factorial(5) => {factorial(5)}')
+   print(f'Calculating total for lists, like this one [1,2,3] -> total([1,2,3]) => {total([1,2,3])}')
+   print(f'Also for same list we can get average with -> average([1,2,3]) => {average([1,2,3])}')
+   print(f'Last of the sets - setting limit for range with clamp -> clamp(20, 10, 30) => {clamp(20,10,30)}')
