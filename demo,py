@@ -1,0 +1,28 @@
+'''
+Task 5 of Week 03 w/ Python
+Demonstration on two modules that will be imported
+'''
+
+# Importing related modules
+import utils as UT
+import validators as VA
+
+# Passing out example demos
+print('# === Utils demonstrācija ===')
+print(f'# capitalize("hello") -> {UT.capitalize('hello')}')
+print(f'# clamp(15, 0, 10) -> {UT.clamp(15, 0, 10)}')
+print(f'# is_prime(17) -> {UT.is_prime(17)}')
+print(f'# average([10, 20, 30]) -> {UT.average([10, 20, 30])}')
+try: 
+    print(f'factorial(-1) -> {UT.factorial(-1)}')
+except ValueError as e:
+    print(f'factorial(-1) -> ValueError: {e} ')
+print(f'total([500, 2500, 68, 22]) -> {UT.total([500, 2500, 68, 22])}')
+
+print('#')
+print('# === Validators demonstrācija ===')
+print(f'is_email("test@test.lv") -> {VA.is_email('test@test.lv')}')
+print(f'is_strong_password("abc") -> {VA.is_strong_password('abc')}')
+print(f'is_valid_date("2025-13-01") -> {VA.is_valid_date('2025-13-01')}')
+print(f'is_valid_age("175") -> {VA.is_valid_age('175')}')
+print(f'is_phone_number("+371 21214481") -> {VA.is_phone_number('+371 21214481')}')
