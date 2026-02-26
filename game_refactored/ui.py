@@ -86,3 +86,9 @@ class GameUI:
             print(ERROR_INVALID_RETRY)
             return None
         
+if __name__ == "__main__":
+    print("This is guess games user interface module")
+    print("It contains messages like ->")
+    print(WELCOME_MSG)
+    print('And lot more')
+    print(GOODBYE_MSG)

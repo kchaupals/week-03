@@ -88,3 +88,9 @@ class GuessGame:
     def is_game_over(self):
         '''Check if the game has ended (reached max attempts)'''
         return self.attempts >= self.max_attempts
+    
+if __name__ == "__main__":
+    print("This is guess games logic module")
+    print("It handles all the calculations, like the number to guess")
+    guess = GuessGame()
+    print(f'The secret number is -> {guess.secret_number}')

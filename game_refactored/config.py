@@ -35,3 +35,6 @@ WIN_MSG = "✔ Super, spēle beigusies! Tu uzminēji skaitli {number} pēc {atte
 LOSE_MSG = "✖ Tev neizdevās uzminēt. Atbilde bija {number}"
 
 # Placeholders will be filled with dynamic values from Game Logic module
+
+if __name__ == "__main__":
+    print("This file is guess game config and is part of guess game")
